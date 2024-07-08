@@ -109,7 +109,7 @@ def update_output_container(selected_statistics, input_year):
 # Plot 3 Pie chart for total expenditure share by vehicle type during recessions
         # grouping data for plotting
 	# Hint:Use Vehicle_Type and Advertising_Expenditure columns
-        exp_rec= recession_data.groupby('Vehicle_Type')['Advertising_Expenditure'].mean().reset_index()
+        exp_rec= recession_data.groupby('Vehicle_Type')['Advertising_Expenditure'].sum().reset_index()
         R_chart3 = dcc.Graph(
                 figure=px.pie(exp_rec,
                 values='Advertising_Expenditure',
@@ -166,12 +166,12 @@ def update_output_container(selected_statistics, input_year):
     # Total Advertisement Expenditure for each vehicle using pie chart
          # grouping data for plotting.
          # Hint:Use the columns Vehicle_Type and Advertising_Expenditure
-        exp_data=yearly_data.groupby('Vehicle_Type')
+        exp_data=yearly_data.groupby('Vehicle_Type')['Advertising_Expenditure'].sum().reset_index()
         Y_chart4 = dcc.Graph(
             figure=px.pie(exp_data, 
             values='Advertising_Expenditure',
             names='Vehicle_Type',
-            title='Total Advertisment Expenditure for Each Vehicle'))
+            title='Total Advertisment Expenditure for Each Vehicle in the year {}'.format(input_year)))
 
 #TASK 2.6: Returning the graphs for displaying Yearly data
         return [
